@@ -12,11 +12,27 @@
 	<description>DevOps Demo Project</description>
 
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.2.1.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
+               <groupId>org.springframework.boot</groupId>
+               <artifactId>spring-boot-starter-parent</artifactId>
+               <version>1.2.1.RELEASE</version>
+        </parent>
+
+	<distributionManagement>
+        <!-- Publish versioned releases here -->
+        <repository>
+          <id>nexus</id>
+          <name>release</name>
+          <url>http://10.21.21.99:8112/nexus/content/repositories/releases</url>
+        </repository>
+
+        <!-- Publish snapshots here -->
+        <snapshotRepository>
+          <id>nexus</id>
+          <name>snapshots</name>
+          <url>http://10.21.21.99:8112/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+        </distributionManagement>
+
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -28,6 +44,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<version>1.2.1.RELEASE</version>
 		</dependency>
 		<!--dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -37,6 +54,7 @@
 		<dependency>
             		<groupId>com.fasterxml.jackson.core</groupId>
             		<artifactId>jackson-databind</artifactId>
+			<version>LATEST</version>
         	</dependency>
 	</dependencies>
 

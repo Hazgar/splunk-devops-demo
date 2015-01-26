@@ -6,6 +6,7 @@ classes:
 # JDK install
 riskim_jdk::install::packagedir: "/tmp/platform"
 riskim_jdk::install::prefix: /usr/java
+riskim_jdk::install::version: '1.8.0_31'
 
 #
 # JBoss mod_cluster: Tomcat clustering module

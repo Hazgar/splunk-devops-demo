@@ -1,0 +1,19 @@
+---
+
+# create_resources is used in the 'riskim_tomcat' puppet module
+riskim_tomcat::config::instances:
+  CalcService:
+    clone: 0
+    service_enabled: true
+    balancer_name: test
+#    global_resource_definitions:
+#      - resource_HpceProperties
+#    config_class: "hpce::config::calcservice"
+    logs_directory: "/var/log/devops/logs/calc-service"
+    webapps:
+      # create_resources, element name must be unique
+      devops-demo:
+        file: devops-demo.war
+        artifact_id: "devops-demo"
+        artifact_groupid: "com.bnpparibas.risk.re.applications"
+        artifact_version: "1.0-SNAPSHOT"

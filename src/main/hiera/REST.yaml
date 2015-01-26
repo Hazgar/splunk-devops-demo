@@ -1,0 +1,14 @@
+---
+
+packages:
+  tomcat-native:
+    ensure: present
+
+#
+# REST services tomcat instances
+riskim_tomcat::config::master_service: true
+riskim_tomcat::config::java_opts:
+  - JAVA_HOME=/usr/java/jdk1.7.0_11/
+  - JAVA_OPTS=$JAVA_OPTS\ -Xms2G
+  - JAVA_OPTS=$JAVA_OPTS\ -Xmx2G
+  - JAVA_OPTS=$JAVA_OPTS\ -XX:MaxDirectMemorySize=1G

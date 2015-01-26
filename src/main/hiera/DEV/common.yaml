@@ -1,0 +1,23 @@
+---
+
+#
+# JDK install
+riskim_jdk::install::version: '1.7.0_51'
+
+#
+# Maven config
+maven_setup:
+  settings:
+    user: "devops"
+    local_repo: "/data/.puppet_maven"
+    purge: "com/splunk"
+    repositories:
+      devsnapshots:
+        url: "http://10.21.21.99:8112"
+        releases:
+          enabled: "true"
+          updatePolicy: "always"
+        snapshots:
+          enabled: "true"
+          updatePolicy: "always"
+

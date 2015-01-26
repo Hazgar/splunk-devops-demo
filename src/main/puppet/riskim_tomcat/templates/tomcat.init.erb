@@ -1,0 +1,188 @@
+#!/bin/bash
+#
+# riskim_<%= @instance_name %>      This shell script takes care of starting and stopping Risk-IM Tomcat instance for <%= @instance_name %>.
+#
+# chkconfig: 2345 99 20
+# description: This script starts the Risk-IM Tomcat daemon for <%= @instance_name %>.
+#
+### BEGIN INIT INFO
+# Provides: riskim_<%= @instance_name %>
+# Required-Start: $network $syslog
+# Required-Stop: $network $syslog
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Description: This script starts the Risk-IM Tomcat daemon for <%= @instance_name %>.
+# Short-Description: start and stop <%= @instance_name %>
+### END INIT INFO
+
+## Source function library.
+. /etc/rc.d/init.d/functions
+
+#unset ISBOOT
+#if [ "${NAME:0:1}" = "S" -o "${NAME:0:1}" = "K" ]; then
+#    NAME="${NAME:3}"
+#    ISBOOT="1"
+#fi
+
+# Catalina config
+if [ -f "<%= @catalina_base %>/bin/setenv.sh" ] ; then
+    . "<%= @catalina_base %>/bin/setenv.sh"
+fi
+
+# Service definition
+TOMCAT_USER="<%= @user %>"
+TOMCAT_PROG="riskim_<%= @instance_name %>"
+
+CURRENT_USER=$(/usr/bin/whoami)
+LOG_FILE="<%= @catalina_base %>/logs/${TOMCAT_PROG}.log"
+
+# Path to the start/stop scripts
+STARTUP_SCRIPT="<%= @catalina_base %>/bin/startup.sh"
+SHUTDOWN_SCRIPT="<%= @catalina_base %>/bin/shutdown.sh"
+
+# For SELinux we need to use 'runuser' not 'su'
+if [ "$CURRENT_USER" = "$TOMCAT_USER" ] ; then
+    SU="/bin/bash"
+elif [ -x "/sbin/runuser" ]; then
+    SU="/sbin/runuser -s /bin/bash ${TOMCAT_USER}"
+else
+    SU="/bin/su -s /bin/bash ${TOMCAT_USER}"
+fi
+
+RETVAL="0"
+
+function start() {
+    echo -n "Starting ${TOMCAT_PROG}: "
+
+    checkpidfile
+    if [ "$RETVAL" -eq "0" ]; then
+        echo -n "$TOMCAT_PROG (pid ${kpid}) is running..."
+    else
+        $SU -c "${STARTUP_SCRIPT} >> $LOG_FILE 2>&1" && RETVAL=0 || RETVAL="4"
+    fi
+   
+    if [ "$RETVAL" -eq "0" ]; then 
+        success
+    else
+        echo -n "Error code ${RETVAL}"
+        failure
+    fi
+
+    echo
+}
+
+function stop() {
+    echo -n "Stopping ${TOMCAT_PROG}: "
+    [ "$RETVAL" -eq "0" ] && $SU -c "${SHUTDOWN_SCRIPT} -force >> $LOG_FILE 2>&1" || RETVAL="$?"
+
+    # Ignore 'catalina.sh' exit code '1'
+    [ "$RETVAL" -eq "1" ] && RETVAL="0"
+
+    # Check that there is no process left...
+    checkpidfile
+    [ ! "$RETVAL" -eq "0" ] && kpid="$(/usr/bin/pgrep -d ' ' -u ${TOMCAT_USER} -f "tomcat.jvmroute=$JVM_ROUTE")" || RETVAL="0"
+    echo "kpid=$kpid" >> $LOG_FILE
+    if [ "x" != "x$kpid" ] ; then
+        echo "$(date +"%Y-%m-%d %H:%M:%S") Killing process: $kpid" >> $LOG_FILE
+        kill -9 $kpid && RETVAL="0" || RETVAL="4"
+        [ "$RETVAL" -eq "4" ] && echo "$(date +"%Y-%m-%d %H:%M:%S") Failed to kill process: $kpid" >> $LOG_FILE
+    fi
+    rm -f "${CATALINA_PID}" || RETVAL="4"
+    echo "$(date +"%Y-%m-%d %H:%M:%S") PID file removed: ${CATALINA_PID}" >> $LOG_FILE
+
+    if [ "$RETVAL" -eq "0" ]; then
+        success
+    else
+        echo -n "Error code ${RETVAL}"
+        failure
+    fi
+
+    echo
+}
+
+function status() {
+    checkpidfile 
+    if [ "$RETVAL" -eq "0" ]; then
+        echo -n "$TOMCAT_PROG (pid ${kpid}) is running..."
+        success
+    else 
+        checklockfile
+        if [ "$RETVAL" -eq "2" ]; then
+            echo -n "${TOMCAT_PROG} lockfile exists but process is not running"
+            failure
+        else
+            pid="$(/usr/bin/pgrep -d ',' -u ${TOMCAT_USER} -f "tomcat.jvmroute=$JVM_ROUTE")"
+            if [ -z "$pid" ]; then
+                echo -n "$TOMCAT_PROG is stopped"
+                RETVAL="3"
+            else
+                echo -n "$TOMCAT_PROG (pid $pid) is running..."
+                RETVAL="0"
+            fi
+            success
+        fi
+    fi
+    echo
+}
+
+function checklockfile() {
+    RETVAL="0"
+}
+
+function checkpidfile()
+{
+    # pid file does not exist and program is not running
+    RETVAL="3"
+    # pid file exists
+    if [ -s "${CATALINA_PID}" ]; then
+        read kpid < ${CATALINA_PID}
+        if [ -f "/proc/${kpid}/status" ]; then
+            # The pid file exists and the process is running
+            RETVAL="0"
+        else
+            # The pid file exists but the process is not running
+            RETVAL="1"
+        fi
+    fi
+}
+
+
+function usage()
+{
+   echo "Usage: $0 {start|stop|restart|condrestart|try-restart|reload|force-reload|status|version}"
+   RETVAL="2"
+}
+
+# check log file owner
+if [ -f "$LOG_FILE" ] && ( ! stat -c "%u" "$LOG_FILE" | grep "$TOMCAT_USER" >/dev/null 2>&2 ) ; then
+  chown "$TOMCAT_USER" "$LOG_FILE"
+fi
+
+RETVAL="0"
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart|condrestart|try-restart|force-reload)
+        stop
+        RETVAL="0"
+        start
+        ;;
+    reload)
+        RETVAL="3"
+        ;;
+    status)
+        status
+        ;;
+    version)
+        echo "0.1"
+        ;;
+    *)
+      usage
+      ;;
+esac
+
+exit $RETVAL

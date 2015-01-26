@@ -1,0 +1,32 @@
+---
+classes:
+  - test
+
+#
+# JDK install
+riskim_jdk::install::packagedir: "/tmp/platform"
+riskim_jdk::install::prefix: /usr/java
+
+#
+# JBoss mod_cluster: Tomcat clustering module
+java_modcluster_libs::install::packagedir: "/tmp/platform"
+java_modcluster_libs::install::package: "jboss-mod_cluster"
+java_modcluster_libs::install::version: "1.2.0"
+java_modcluster_libs::install::prefix: "/usr/java"
+
+#
+# Apache Tomcat base config
+riskim_tomcat::install::type: sourceinstall
+riskim_tomcat::install::packagedir: "/tmp/platform"
+riskim_tomcat::install::appsdir: "/tmp/application/target"
+riskim_tomcat::install::version: '7.0.26'
+riskim_tomcat::install::prefix: "/opt/devops"
+riskim_tomcat::install::user: "devops"
+riskim_tomcat::install::group: "devops"
+riskim_tomcat::config::instancedir: "/ops/devops/test"
+riskim_tomcat::config::base_server_port: 8500
+riskim_tomcat::config::base_http_port: 8080
+riskim_tomcat::config::base_https_port: 8442
+riskim_tomcat::config::base_ajp_port: 8009
+riskim_tomcat::config::base_jmx_port: 2810
+

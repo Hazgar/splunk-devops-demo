@@ -20,7 +20,7 @@ java_modcluster_libs::install::prefix: "/usr/java"
 riskim_tomcat::install::type: sourceinstall
 riskim_tomcat::install::packagedir: "/tmp/platform"
 riskim_tomcat::install::appsdir: "/tmp/application/target"
-riskim_tomcat::install::version: '7.0.26'
+riskim_tomcat::install::version: '8.0.17'
 riskim_tomcat::install::prefix: "/opt/devops"
 riskim_tomcat::install::user: "devops"
 riskim_tomcat::install::group: "devops"

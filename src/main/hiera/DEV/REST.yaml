@@ -5,7 +5,7 @@ riskim_tomcat::config::instances:
   CalcService:
     clone: 0
     service_enabled: true
-    balancer_name: test
+#    balancer_name: test
 #    global_resource_definitions:
 #      - resource_HpceProperties
 #    config_class: "hpce::config::calcservice"

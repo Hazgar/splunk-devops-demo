@@ -18,15 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class CalculationController
 {    
     @RequestMapping(value = "/batch", method = RequestMethod.GET)
-    public Map<UUID,Collection<CalculationResult>> batchCalculation()
+    public BatchCalculationResult batchCalculation()
     {
-    	Map<UUID,Collection<CalculationResult>> batch = new HashMap<UUID,Collection<CalculationResult>>();
-    	
     	ArrayList<CalculationResult> results = new ArrayList<CalculationResult>();
     	for (Counterparty ctrp : Counterparties.getCounterparties())
     		results.add(new Calculation(ctrp).runFull());
-    	batch.put(UUID.randomUUID(), results);
-    	return batch;
+    	return new BatchCalculationResult(results);
     }
     
     @RequestMapping(value = "/single/{symbol}", method = RequestMethod.GET)

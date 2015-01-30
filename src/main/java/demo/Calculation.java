@@ -2,13 +2,10 @@ package demo;
 
 import java.math.BigInteger;
 import java.util.UUID;
-import java.util.logging.Logger;
 
 public class Calculation
 {
 	private static int MAGIC_FACTORIAL = 100;
-	
-	private static Logger logger = Logger.getLogger(Calculation.class.getName());;
 	
     private final UUID id = UUID.randomUUID();
     private final Counterparty ctrp;
@@ -30,8 +27,6 @@ public class Calculation
     
     public CalculationResult runFull()
     {
-    	long startTime = System.nanoTime();
-    	logger.info(String.format("Start full calculation for %s with calculationId=\"%s\"", ctrp, id));
     	CalculationResult result = new CalculationResult(ctrp, sqrtDeals(),
     									   powDeals(),
     									   log10Deals(),
@@ -40,8 +35,6 @@ public class Calculation
     									   tanDeals(),
     									   factorialDeals(),
     									   isPrimeDeals());
-    	long endTime = System.nanoTime();
-    	logger.info(String.format("Calculation for %s with calculationId=\"%s\" completed delta=%d", ctrp, id, endTime - startTime));
     	return result;
     }
     

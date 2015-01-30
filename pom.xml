@@ -10,6 +10,10 @@
 
 	<name>DevOps-demo</name>
 	<description>DevOps Demo Project</description>
+        <organization>
+		<name>Splunk, Inc</name>
+    		<url>http://www.splunk.com</url>
+	</organization>
 
 	<parent>
                <groupId>org.springframework.boot</groupId>
@@ -83,6 +87,23 @@
 					<url>http://localhost:8080/manager/text</url>
 					<server>tomcat7</server>
 					<path>/devops-demo</path>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+				    <archive>
+					<manifest>
+					    <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+					    <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+					</manifest>
+					<manifestEntries>
+					    <Teamcity-Build-Number>${build.number}</Teamcity-Build-Number>
+					    <Teamcity-VCS-Branch>${vcsroot.branch}</Teamcity-VCS-Branch>
+					    <Teamcity-VCS-commit>${build.vcs.number}</Teamcity-VCS-commit>
+					</manifestEntries>
+				    </archive>
 				</configuration>
 			</plugin>
 		</plugins>

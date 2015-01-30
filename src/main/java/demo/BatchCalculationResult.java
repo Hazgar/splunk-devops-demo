@@ -1,16 +1,21 @@
 package demo;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
 
 public class BatchCalculationResult
 {
 	private final UUID id = UUID.randomUUID();
-	private final Collection<CalculationResult> results;
+	private Collection<CalculationResult> results = new ArrayList<CalculationResult>();
 	
-	public BatchCalculationResult(Collection<CalculationResult> results)
+	public BatchCalculationResult()
 	{
-		this.results = results;
+	}
+	
+	public void addResult(CalculationResult result)
+	{
+		results.add(result);
 	}
 	
 	public UUID getId()

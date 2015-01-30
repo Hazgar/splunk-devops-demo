@@ -1,5 +1,6 @@
 package demo;
 
+import java.util.Collection;
 import java.util.logging.Logger;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,12 @@ public class CounterpartiesController
 	/*
 	 * Getters
 	 */
+	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+    public Collection<Counterparty> getCounterparties()
+    {
+        return Counterparties.getCounterparties();
+    }
 	
 	@RequestMapping(value = "/{symbol}", method = RequestMethod.GET)
     public Counterparty getCounterparty(@PathVariable String symbol)

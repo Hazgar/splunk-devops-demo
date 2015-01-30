@@ -49,7 +49,7 @@ public class Counterparties
 		add(new Counterparty("UL","Unibail-Rodamco SE",110491));
 		add(new Counterparty("VIE","Veolia Environnement SA",479975));
 		add(new Counterparty("VIV","Vivendi SA",1100548));
-		add(new Counterparty("SPLK","Splunk Inc",42000000));
+		add(new Counterparty("SPLK","Splunk Inc",4200));
 		}
 	};
 

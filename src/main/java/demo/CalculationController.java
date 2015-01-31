@@ -27,6 +27,7 @@ public class CalculationController
     		cob = format.parse(cob_date);
     	} catch (Exception e) {
     		logger.severe(String.format("failed to parse cob_date=%s", cob_date));
+    		throw new CobFormatException();
     	}
     	BatchCalculationResult result = new BatchCalculationResult(); 
     	
@@ -61,6 +62,7 @@ public class CalculationController
     		cob = format.parse(cob_date);
     	} catch (Exception e) {
     		logger.severe(String.format("failed to parse cob_date=%s", cob_date));
+    		throw new CobFormatException();
     	}
     	
     	Counterparty ctrp = Counterparties.getCounterparty(symbol);

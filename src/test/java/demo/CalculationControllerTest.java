@@ -48,20 +48,20 @@ public class CalculationControllerTest {
 	    
 	    @Test
 	    public void batchCalculation() throws Exception {
-	        mockMvc.perform(get("/calculation/batch").accept(MediaType.APPLICATION_JSON))
+	        mockMvc.perform(get("/calculation/batch/2015-01-29").accept(MediaType.APPLICATION_JSON))
 	        		.andExpect(status().isOk());
 	    }
 	    
 	    @Test
 	    public void singleCalculation() throws Exception {
-	        mockMvc.perform(get("/calculation/single/{symbol}", "AC").accept(MediaType.APPLICATION_JSON))
+	        mockMvc.perform(get("/calculation/single/{cob_date}/{symbol}", "2015-01-29", "AC").accept(MediaType.APPLICATION_JSON))
 	        		.andExpect(status().isOk())
 	                .andDo(print());
 	    }
 	    
 	    @Test
 	    public void postSingleCalculation() throws Exception {
-	        mockMvc.perform(post("/calculation/single?symbol={symbol}", "AC").accept(MediaType.APPLICATION_JSON))
+	        mockMvc.perform(post("/calculation/single?cob_date={cob_date}&symbol={symbol}", "2015-01-29", "AC").accept(MediaType.APPLICATION_JSON))
 	        		.andExpect(status().isOk())
 	                .andDo(print());
 	    }

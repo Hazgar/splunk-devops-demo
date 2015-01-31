@@ -1,18 +1,21 @@
 package demo;
 
 import java.math.BigInteger;
+import java.util.Date;
 import java.util.UUID;
 
 public class Calculation
 {
-	private static int MAGIC_FACTORIAL = 10;
+	private static int MAGIC_FACTORIAL = 100;
 	
     private final UUID id = UUID.randomUUID();
     private final Counterparty ctrp;
+    private final double cob_date_modifier;
 
-    public Calculation(Counterparty ctrp)
+    public Calculation(Date cob_date, Counterparty ctrp)
     {
         this.ctrp = ctrp;
+        this.cob_date_modifier = Math.abs(Math.cos(cob_date.getTime() / 100000));
     }
 
     public UUID getId()
@@ -40,39 +43,39 @@ public class Calculation
     
     private Double sqrtDeals()
     {
-    	return Math.sqrt(ctrp.getDeals());
+    	return Math.sqrt(ctrp.getDeals() * cob_date_modifier);
     }
     
     private Double powDeals()
     {
-    	return Math.pow(ctrp.getDeals(), 42.0);
+    	return Math.pow(ctrp.getDeals() * cob_date_modifier, 42.0);
     }
     
     private Double log10Deals()
     {
-    	return Math.log10(ctrp.getDeals());
+    	return Math.log10(ctrp.getDeals() * cob_date_modifier);
     }
     
     private Double cosDeals()
     {
-    	return Math.cos(ctrp.getDeals());
+    	return Math.cos(ctrp.getDeals() * cob_date_modifier);
     }
     
     private Double sinDeals()
     {
-    	return Math.sin(ctrp.getDeals());
+    	return Math.sin(ctrp.getDeals() * cob_date_modifier);
     }
     
     private Double tanDeals()
     {
-    	return Math.tan(ctrp.getDeals());
+    	return Math.tan(ctrp.getDeals() * cob_date_modifier);
     }
 
     private BigInteger factorialDeals()
     {
-    	Integer n = ctrp.getDeals() / MAGIC_FACTORIAL;
+    	long n = Math.round((ctrp.getDeals() * cob_date_modifier) / MAGIC_FACTORIAL);
     	BigInteger fact = BigInteger.valueOf(1);
-        for (Integer i = 1; i <= n; i++) {
+        for (long i = 1; i <= n; i++) {
             fact = fact.multiply(BigInteger.valueOf(i));
         }
         return fact;
@@ -80,7 +83,7 @@ public class Calculation
     
     public boolean isPrimeDeals()
     {
-    	Integer number = ctrp.getDeals();
+    	long number = Math.round(ctrp.getDeals() * cob_date_modifier);
         if (number == 2 || number == 3)
             return true;
         if (number % 2 == 0)

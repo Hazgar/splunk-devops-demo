@@ -3,6 +3,7 @@ package demo;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Logger;
+
 import javax.validation.Valid;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +19,7 @@ public class CalculationController
 	private final static Logger logger = Logger.getLogger(CalculationController.class.getName());;
 	
     @RequestMapping(value = "/batch/{cob_date}", method = RequestMethod.GET)
-    public BatchCalculationResult batchCalculation(@PathVariable String cob_date)
+    public BatchCalculationResult batchCalculation(@PathVariable String cob_date) throws CobFormatException
     {
     	Date cob = new Date();
     	Calculation calc;
@@ -26,8 +27,9 @@ public class CalculationController
     	try {
     		cob = format.parse(cob_date);
     	} catch (Exception e) {
-    		logger.severe(String.format("failed to parse cob_date=%s", cob_date));
-    		throw new CobFormatException();
+    		String error = String.format("failed to parse cob_date=%s", cob_date);
+    		logger.severe(error);
+    		throw new CobFormatException(error);
     	}
     	BatchCalculationResult result = new BatchCalculationResult(); 
     	
@@ -54,15 +56,16 @@ public class CalculationController
     }
     
     @RequestMapping(value = "/single/{cob_date}/{symbol}", method = RequestMethod.GET)
-    public CalculationResult singleCalculation(@PathVariable String cob_date, @PathVariable String symbol)
+    public CalculationResult singleCalculation(@PathVariable String cob_date, @PathVariable String symbol) throws CobFormatException
     {
     	Date cob = new Date();
     	
     	try {
     		cob = format.parse(cob_date);
     	} catch (Exception e) {
-    		logger.severe(String.format("failed to parse cob_date=%s", cob_date));
-    		throw new CobFormatException();
+    		String error = String.format("failed to parse cob_date=%s", cob_date);
+    		logger.severe(error);
+    		throw new CobFormatException(error);
     	}
     	
     	Counterparty ctrp = Counterparties.getCounterparty(symbol);
@@ -81,7 +84,7 @@ public class CalculationController
     }
     
     @RequestMapping(value = "/single", method = RequestMethod.POST)
-    public CalculationResult postSingleCalculation(@Valid String cob_date, @Valid String symbol)
+    public CalculationResult postSingleCalculation(@Valid String cob_date, @Valid String symbol) throws CobFormatException
     {
     	return singleCalculation(cob_date, symbol);
     }

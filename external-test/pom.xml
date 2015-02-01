@@ -73,9 +73,9 @@
 								<webservice.host>${perftest.webservice.host}</webservice.host>
 								<webservice.port>${perftest.webservice.port}</webservice.port>
 								<webservice.path>${perftest.webservice.path}</webservice.path>
-								<connectTimeout>1000</connectTimeout>
-								<responseTimeout>3000</responseTimeout>
-								<threadCount>20</threadCount>
+								<webservice.connectTimeout>1000</webservice.connectTimeout>
+								<webservice.responseTimeout>5000</webservice.responseTimeout>
+								<threadCount>40</threadCount>
 								<loopCount>10</loopCount>
 							</propertiesUser>
 							<testResultsTimestamp>false</testResultsTimestamp>

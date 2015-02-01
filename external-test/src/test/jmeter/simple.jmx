@@ -39,7 +39,7 @@
           </elementProp>
           <elementProp name="RESPONSE_TIMEOUT" elementType="Argument">
             <stringProp name="Argument.name">RESPONSE_TIMEOUT</stringProp>
-            <stringProp name="Argument.value">${__P(webservice.responseTimeout,3000)}</stringProp>
+            <stringProp name="Argument.value">${__P(webservice.responseTimeout,5000)}</stringProp>
             <stringProp name="Argument.desc">Webservice response timeout.</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
@@ -256,7 +256,7 @@
             <threadCounts>true</threadCounts>
           </value>
         </objProp>
-        <stringProp name="filename">/Users/slapie/work/devops-demo/external-test/target/jmeter/results/simple.jtl</stringProp>
+        <stringProp name="filename">/Users/slapie/work/devops-demo/simple.jtl</stringProp>
       </ResultCollector>
       <hashTree/>
       <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="ctrp.csv" enabled="true">

@@ -49,6 +49,8 @@
 				<perftest.webservice.host>localhost</perftest.webservice.host>	
 				<perftest.webservice.port>8080</perftest.webservice.port>	
 				<perftest.webservice.path>/devops-demo/calculation/single/2015-01-29</perftest.webservice.path>
+				<perftest.webservice.connectTimeout>5000</perftest.webservice.connectTimeout>
+				<perftest.webservice.responseTimeout>5000</perftest.webservice.responseTimeout>
 			</properties>
 		</profile>
 		<profile>
@@ -57,6 +59,8 @@
 				<perftest.webservice.host>10.21.21.100</perftest.webservice.host>	
 				<perftest.webservice.port>80</perftest.webservice.port>	
 				<perftest.webservice.path>/test/devops-demo/calculation/single/2015-01-29</perftest.webservice.path>
+				<perftest.webservice.connectTimeout>5000</perftest.webservice.connectTimeout>
+				<perftest.webservice.responseTimeout>5000</perftest.webservice.responseTimeout>
 			</properties>
 		</profile>
 
@@ -73,10 +77,10 @@
 								<webservice.host>${perftest.webservice.host}</webservice.host>
 								<webservice.port>${perftest.webservice.port}</webservice.port>
 								<webservice.path>${perftest.webservice.path}</webservice.path>
-								<webservice.connectTimeout>1000</webservice.connectTimeout>
-								<webservice.responseTimeout>5000</webservice.responseTimeout>
+								<webservice.connectTimeout>${perftest.webservice.connectTimeout}</webservice.connectTimeout>
+								<webservice.responseTimeout>${perftest.webservice.reponseTimeout}</webservice.responseTimeout>
 								<threadCount>40</threadCount>
-								<loopCount>10</loopCount>
+								<loopCount>5</loopCount>
 							</propertiesUser>
 							<testResultsTimestamp>false</testResultsTimestamp>
 							<overrideRootLogLevel>DEBUG</overrideRootLogLevel>

@@ -6,7 +6,7 @@
 	<groupId>com.splunk.slapie.demo.devops</groupId>
 	<artifactId>devops-demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>pom</packaging>
 
 	<name>DevOps-demo</name>
 	<description>DevOps Demo Project</description>
@@ -14,12 +14,6 @@
 		<name>Splunk, Inc</name>
     		<url>http://www.splunk.com</url>
 	</organization>
-
-	<parent>
-               <groupId>org.springframework.boot</groupId>
-               <artifactId>spring-boot-starter-parent</artifactId>
-               <version>1.2.1.RELEASE</version>
-        </parent>
 
 	<distributionManagement>
         <!-- Publish versioned releases here -->
@@ -38,83 +32,8 @@
         </distributionManagement>
 
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<start-class>demo.DevOpsDemoApplication</start-class>
-		<java.version>1.7</java.version>
-	</properties>
-
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-            		<groupId>com.fasterxml.jackson.core</groupId>
-            		<artifactId>jackson-databind</artifactId>
-        	</dependency>
-		<dependency>
-		    <groupId>junit</groupId>
-		    <artifactId>junit</artifactId>
-		    <version>4.11</version>
-		    <scope>test</scope>
-		    <exclusions>
-			<exclusion>
-			    <artifactId>hamcrest-core</artifactId>
-			    <groupId>org.hamcrest</groupId>
-			</exclusion>
-		    </exclusions>
-		</dependency>
-		<dependency>
-		    <groupId>org.mockito</groupId>
-		    <artifactId>mockito-core</artifactId>
-		    <version>1.9.5</version>
-		    <scope>test</scope>
-		</dependency>
-	</dependencies>
-
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>tomcat-maven-plugin</artifactId>
-				<configuration>
-					<url>http://localhost:8080/manager/text</url>
-					<server>tomcat7</server>
-					<path>/devops-demo</path>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<configuration>
-				    <archive>
-					<manifest>
-					    <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-					    <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-					</manifest>
-					<manifestEntries>
-					    <Teamcity-Build-Number>${build.number}</Teamcity-Build-Number>
-					    <Teamcity-VCS-Branch>${vcsroot.branch}</Teamcity-VCS-Branch>
-					    <Teamcity-VCS-commit>${build.vcs.number}</Teamcity-VCS-commit>
-					</manifestEntries>
-				    </archive>
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
-	<!--build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build-->
-
 </project>

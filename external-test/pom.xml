@@ -155,4 +155,20 @@
 			</build>
 		</profile>
 	</profiles>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.17</version>
+				<configuration>
+				  <systemPropertyVariables>
+				    <testHost>${perftest.webservice.host}</testHost>
+				    <testPort>${perftest.webservice.port}</testPort>
+				  </systemPropertyVariables>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

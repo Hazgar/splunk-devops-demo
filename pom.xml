@@ -8,7 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>DevOps-demo</name>
+	<name>devops-demo</name>
 	<description>DevOps Demo Project</description>
         <organization>
 		<name>Splunk, Inc</name>
@@ -31,9 +31,19 @@
         </snapshotRepository>
         </distributionManagement>
 
+	<profiles>
+		<profile>
+			<id>calc</id>
+			<modules>
+				<module>calculator</module>
+			</modules>
+		</profile>
+		<profile>
+			<id>extest</id>
+			<modules>
+				<module>external-test</module>
+			</modules>
+		</profile>
+	</profiles>
 
-	<build>
-		<plugins>
-		</plugins>
-	</build>
 </project>

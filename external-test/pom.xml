@@ -7,7 +7,7 @@
 	<artifactId>extest</artifactId>
 	<packaging>pom</packaging>
 
-	<name>devops-demo-ext-test</name>
+	<name>devops-demo:external-test</name>
 	<description>DevOps Demo Project: External Tests</description>
         <organization>
 		<name>Splunk, Inc</name>

@@ -82,7 +82,7 @@
 								<threadCount>40</threadCount>
 								<loopCount>5</loopCount>
 							</propertiesUser>
-							<testResultsTimestamp>false</testResultsTimestamp>
+							<testResultsTimestamp>true</testResultsTimestamp>
 							<overrideRootLogLevel>DEBUG</overrideRootLogLevel>
 							<suppressJMeterOutput>false</suppressJMeterOutput>
 							<ignoreResultFailures>true</ignoreResultFailures>
@@ -99,7 +99,7 @@
 						<executions>
 							<execution>
 							    <id>jmeter-tests</id>
-							    <phase>verify</phase>
+							    <phase>test</phase>
 							    <goals>
 								<goal>jmeter</goal>
 							    </goals>

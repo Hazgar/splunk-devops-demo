@@ -18,7 +18,7 @@ import com.eclipsesource.restfuse.annotation.Poll;
 public class DemoLoadTest
 { 
 	@Rule
-	public Destination restfuse = new Destination( this, String.format("http://%s:%s", System.getProperty("testHost"), System.getProperty("testPort")));
+	public Destination restfuse = new Destination( this, String.format("http://%s:%s/%s", System.getProperty("testHost"), System.getProperty("testPort"), System.getProperty("testPrefix")));
 	
 	@Context
 	private PollState pollState;

@@ -51,6 +51,7 @@
 				<perftest.webservice.path>/devops-demo/calculation/single/2015-01-29</perftest.webservice.path>
 				<perftest.webservice.connectTimeout>5000</perftest.webservice.connectTimeout>
 				<perftest.webservice.responseTimeout>5000</perftest.webservice.responseTimeout>
+				<restfuse.path.prefix>/</restfuse.path.prefix>
 			</properties>
 		</profile>
 		<profile>
@@ -61,6 +62,7 @@
 				<perftest.webservice.path>/test/devops-demo/calculation/single/2015-01-29</perftest.webservice.path>
 				<perftest.webservice.connectTimeout>5000</perftest.webservice.connectTimeout>
 				<perftest.webservice.responseTimeout>5000</perftest.webservice.responseTimeout>
+				<restfuse.path.prefix>/test</restfuse.path.prefix>
 			</properties>
 		</profile>
 
@@ -166,6 +168,7 @@
 				  <systemPropertyVariables>
 				    <testHost>${perftest.webservice.host}</testHost>
 				    <testPort>${perftest.webservice.port}</testPort>
+				    <testPrefix>${restfuse.path.prefix}</testPrefix>
 				  </systemPropertyVariables>
 				</configuration>
 			</plugin>

@@ -5,7 +5,7 @@
 
 	<groupId>com.splunk.slapie.demo.devops</groupId>
 	<artifactId>extest</artifactId>
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
 
 	<name>devops-demo:external-test</name>
 	<description>DevOps Demo Project: External Tests</description>

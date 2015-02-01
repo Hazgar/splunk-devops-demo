@@ -82,7 +82,7 @@
 								<webservice.connectTimeout>${perftest.webservice.connectTimeout}</webservice.connectTimeout>
 								<webservice.responseTimeout>${perftest.webservice.reponseTimeout}</webservice.responseTimeout>
 								<threadCount>40</threadCount>
-								<loopCount>5</loopCount>
+								<loopCount>2</loopCount>
 							</propertiesUser>
 							<testResultsTimestamp>true</testResultsTimestamp>
 							<overrideRootLogLevel>DEBUG</overrideRootLogLevel>

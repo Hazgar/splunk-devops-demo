@@ -142,7 +142,10 @@
             <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
             <assertionsResultsToSave>0</assertionsResultsToSave>
             <bytes>true</bytes>
+            <url>true</url>
+            <hostname>true</hostname>
             <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
           </value>
         </objProp>
         <stringProp name="filename">/Users/slapie/work/devops-demo/external-test/target/jmeter/results/simple.jtl</stringProp>
@@ -179,6 +182,8 @@
             <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
             <assertionsResultsToSave>0</assertionsResultsToSave>
             <bytes>true</bytes>
+            <url>true</url>
+            <hostname>true</hostname>
             <threadCounts>true</threadCounts>
           </value>
         </objProp>
@@ -216,6 +221,8 @@
             <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
             <assertionsResultsToSave>0</assertionsResultsToSave>
             <bytes>true</bytes>
+            <url>true</url>
+            <hostname>true</hostname>
             <threadCounts>true</threadCounts>
           </value>
         </objProp>

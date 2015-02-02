@@ -34,23 +34,23 @@ public class CalculationController
     	BatchCalculationResult result = new BatchCalculationResult(); 
     	
     	long startBatchTime = System.nanoTime();
-    	logger.info(String.format("start batch_calculation_id=\"%s\"", result.getId()));
+    	logger.info(String.format("start batch_calculation_id=\"%s\" cob_date=\"%s\"", result.getId(), cob_date));
     	
     	for (Counterparty ctrp : Counterparties.getCounterparties())
     	{
     		calc = new Calculation(cob, ctrp);
     		
     		long startCalcTime = System.nanoTime();
-    		logger.info(String.format("start batch_calculation_id=\"%s\" calculation_id=\"%s\" ctrp=\"%s\"", result.getId(), calc.getId(), ctrp.getName()));
+    		logger.info(String.format("start batch_calculation_id=\"%s\" calculation_id=\"%s\" cob_date=\"%s\" ctrp=\"%s\"", result.getId(), calc.getId(), cob_date, ctrp.getName()));
     		
     		result.addResult(calc.runFull());
     		
     		long endCalcTime = System.nanoTime();
-    		logger.info(String.format("end batch_calculation_id=\"%s\" calculation_id=\"%s\" ctrp=\"%s\" delta=%d", result.getId(), calc.getId(), ctrp.getName(), endCalcTime - startCalcTime));
+    		logger.info(String.format("end batch_calculation_id=\"%s\" calculation_id=\"%s\" cob_date=\"%s\" ctrp=\"%s\" delta=%d", result.getId(), calc.getId(), cob_date, ctrp.getName(), endCalcTime - startCalcTime));
     	}
     	
     	long endBatchTime = System.nanoTime();
-    	logger.info(String.format("end batch_calculation_id=\"%s\" delta=%d", result.getId(), endBatchTime - startBatchTime ));
+    	logger.info(String.format("end batch_calculation_id=\"%s\" cob_date=\"%s\" delta=%d", result.getId(), cob_date, endBatchTime - startBatchTime ));
     	
     	return result;
     }
@@ -72,12 +72,12 @@ public class CalculationController
     	Calculation calc = new Calculation(cob, ctrp);
     	
     	long startCalcTime = System.nanoTime();
-		logger.info(String.format("start batch_calculation_id=\"single\" calculation_id=\"%s\" ctrp=\"%s\"", calc.getId(), ctrp.getName()));
+		logger.info(String.format("start batch_calculation_id=\"single\" calculation_id=\"%s\" cob_date=\"%s\" ctrp=\"%s\"", calc.getId(), cob_date, ctrp.getName()));
     	
 		CalculationResult result = calc.runFull();
 		
 		long endCalcTime = System.nanoTime();
-		logger.info(String.format("end batch_calculation_id=\"single\" calculation_id=\"%s\" ctrp=\"%s\" delta=%d", calc.getId(), ctrp.getName(), endCalcTime - startCalcTime));
+		logger.info(String.format("end batch_calculation_id=\"single\" calculation_id=\"%s\" cob_date=\"%s\" ctrp=\"%s\" delta=%d", calc.getId(), cob_date, ctrp.getName(), endCalcTime - startCalcTime));
 	
 		
     	return result;

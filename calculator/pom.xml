@@ -100,7 +100,7 @@
 					</manifest>
 					<manifestEntries>
 					    <Teamcity-Build-Number>${build.number}</Teamcity-Build-Number>
-					    <Teamcity-VCS-Branch>${vcsroot.branch}</Teamcity-VCS-Branch>
+					    <Teamcity-VCS-Branch>${build.vcs.branch}</Teamcity-VCS-Branch>
 					    <Teamcity-VCS-commit>${build.vcs.number}</Teamcity-VCS-commit>
 					</manifestEntries>
 				    </archive>

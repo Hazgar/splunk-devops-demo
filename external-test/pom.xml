@@ -103,7 +103,7 @@
 						<executions>
 							<execution>
 							    <id>jmeter-tests</id>
-							    <phase>test</phase>
+							    <phase>jmeter</phase>
 							    <goals>
 								<goal>jmeter</goal>
 							    </goals>

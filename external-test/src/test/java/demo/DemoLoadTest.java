@@ -28,7 +28,7 @@ public class DemoLoadTest
 	
 	@HttpTest( method = Method.GET, path = "/devops-demo/calculation/single/2015-01-01/AC" )
 	@Poll( times = 10, interval = 1 )
-	public void checkRestfuseOnlineStatus()
+	public void singleCalculationTest()
 	{
 		System.out.println( "Attemt " + pollState.getTimes() );
 		System.out.println( pollState.getTimes() + ". Responsecode = " + pollState.getResponse( pollState.getTimes() ).getStatus() );
@@ -36,8 +36,16 @@ public class DemoLoadTest
 	
 	@HttpTest( method = Method.GET, path = "/devops-demo/counterparties/",
 	headers = { @Header( name = "Accepted-Language", value = "en-en" ) } )
-	public void checkRestfuseOnlineStatusWithHeader()
+	public void serviceStatusTest()
 	{
 		assertOk( response );
+	}
+	
+	@HttpTest( method = Method.GET, path = "/devops-demo/calculation/batch/2015-01-01" )
+	@Poll( times = 5, interval = 10 )
+	public void batchCalculationTest()
+	{
+		System.out.println( "Attemt " + pollState.getTimes() );
+		System.out.println( pollState.getTimes() + ". Responsecode = " + pollState.getResponse( pollState.getTimes() ).getStatus() );
 	}
 }

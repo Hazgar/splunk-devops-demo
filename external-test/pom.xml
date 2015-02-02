@@ -90,6 +90,8 @@
 							<ignoreResultFailures>false</ignoreResultFailures>
 							<propertiesJMeter>
 								<jmeter.save.saveservice.thread_counts>true</jmeter.save.saveservice.thread_counts>
+								<jmeter.save.saveservice.url>true</jmeter.save.saveservice.url>
+								<jmeter.save.saveservice.hostname>true</jmeter.save.saveservice.hostname>
 							</propertiesJMeter>
 							<jmeterPlugins>
 								<plugin>

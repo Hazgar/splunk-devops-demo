@@ -80,7 +80,7 @@
 								<webservice.port>${perftest.webservice.port}</webservice.port>
 								<webservice.path>${perftest.webservice.path}</webservice.path>
 								<webservice.connectTimeout>${perftest.webservice.connectTimeout}</webservice.connectTimeout>
-								<webservice.responseTimeout>${perftest.webservice.reponseTimeout}</webservice.responseTimeout>
+								<webservice.responseTimeout>${perftest.webservice.responseTimeout}</webservice.responseTimeout>
 								<threadCount>40</threadCount>
 								<loopCount>2</loopCount>
 							</propertiesUser>

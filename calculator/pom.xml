@@ -23,18 +23,18 @@
 
 	<distributionManagement>
         <!-- Publish versioned releases here -->
-        <repository>
+        <!--repository>
           <id>nexus</id>
           <name>release</name>
           <url>http://10.21.21.99:8112/nexus/content/repositories/releases</url>
-        </repository>
+        </repository -->
 
         <!-- Publish snapshots here -->
-        <snapshotRepository>
+        <!-- snapshotRepository>
           <id>nexus</id>
           <name>snapshots</name>
           <url>http://10.21.21.99:8112/nexus/content/repositories/snapshots</url>
-        </snapshotRepository>
+        </snapshotRepository -->
         </distributionManagement>
 
 

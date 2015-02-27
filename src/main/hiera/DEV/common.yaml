@@ -2,7 +2,7 @@
 
 #
 # JDK install
-riskim_jdk::install::version: '1.7.0_51'
+custom_jdk::install::version: '1.7.0_51'
 
 #
 # Maven config

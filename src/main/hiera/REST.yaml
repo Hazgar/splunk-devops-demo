@@ -6,8 +6,8 @@ packages:
 
 #
 # REST services tomcat instances
-riskim_tomcat::config::master_service: true
-riskim_tomcat::config::java_opts:
+custom_tomcat::config::master_service: true
+custom_tomcat::config::java_opts:
   - JAVA_OPTS=$JAVA_OPTS\ -Xms2G
   - JAVA_OPTS=$JAVA_OPTS\ -Xmx2G
   - JAVA_OPTS=$JAVA_OPTS\ -XX:MaxDirectMemorySize=1G

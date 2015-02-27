@@ -4,9 +4,9 @@ classes:
 
 #
 # JDK install
-riskim_jdk::install::packagedir: "/tmp/platform"
-riskim_jdk::install::prefix: /usr/java
-riskim_jdk::install::version: '1.8.0_31'
+custom_jdk::install::packagedir: "/tmp/platform"
+custom_jdk::install::prefix: /usr/java
+custom_jdk::install::version: '1.8.0_31'
 
 #
 # JBoss mod_cluster: Tomcat clustering module
@@ -17,17 +17,17 @@ java_modcluster_libs::install::prefix: "/usr/java"
 
 #
 # Apache Tomcat base config
-riskim_tomcat::install::type: sourceinstall
-riskim_tomcat::install::packagedir: "/tmp/platform"
-riskim_tomcat::install::appsdir: "/tmp/application/target"
-riskim_tomcat::install::version: '8.0.17'
-riskim_tomcat::install::prefix: "/opt/devops"
-riskim_tomcat::install::user: "devops"
-riskim_tomcat::install::group: "devops"
-riskim_tomcat::config::instancedir: "/ops/devops/test"
-riskim_tomcat::config::base_server_port: 8500
-riskim_tomcat::config::base_http_port: 8080
-riskim_tomcat::config::base_https_port: 8442
-riskim_tomcat::config::base_ajp_port: 8009
-riskim_tomcat::config::base_jmx_port: 2810
+custom_tomcat::install::type: sourceinstall
+custom_tomcat::install::packagedir: "/tmp/platform"
+custom_tomcat::install::appsdir: "/tmp/application/target"
+custom_tomcat::install::version: '8.0.17'
+custom_tomcat::install::prefix: "/opt/devops"
+custom_tomcat::install::user: "devops"
+custom_tomcat::install::group: "devops"
+custom_tomcat::config::instancedir: "/ops/devops/test"
+custom_tomcat::config::base_server_port: 8500
+custom_tomcat::config::base_http_port: 8080
+custom_tomcat::config::base_https_port: 8442
+custom_tomcat::config::base_ajp_port: 8009
+custom_tomcat::config::base_jmx_port: 2810
 

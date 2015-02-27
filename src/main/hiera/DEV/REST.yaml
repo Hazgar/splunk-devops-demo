@@ -1,7 +1,7 @@
 ---
 
-# create_resources is used in the 'riskim_tomcat' puppet module
-riskim_tomcat::config::instances:
+# create_resources is used in the 'custom_tomcat' puppet module
+custom_tomcat::config::instances:
   CalcService:
     clone: 0
     service_enabled: true

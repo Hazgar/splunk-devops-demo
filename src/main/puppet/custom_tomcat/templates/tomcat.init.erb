@@ -1,12 +1,12 @@
 #!/bin/bash
 #
-# riskim_<%= @instance_name %>      This shell script takes care of starting and stopping Risk-IM Tomcat instance for <%= @instance_name %>.
+# custom_<%= @instance_name %>      This shell script takes care of starting and stopping Risk-IM Tomcat instance for <%= @instance_name %>.
 #
 # chkconfig: 2345 99 20
 # description: This script starts the Risk-IM Tomcat daemon for <%= @instance_name %>.
 #
 ### BEGIN INIT INFO
-# Provides: riskim_<%= @instance_name %>
+# Provides: custom_<%= @instance_name %>
 # Required-Start: $network $syslog
 # Required-Stop: $network $syslog
 # Default-Start: 2 3 4 5
@@ -31,7 +31,7 @@ fi
 
 # Service definition
 TOMCAT_USER="<%= @user %>"
-TOMCAT_PROG="riskim_<%= @instance_name %>"
+TOMCAT_PROG="custom_<%= @instance_name %>"
 
 CURRENT_USER=$(/usr/bin/whoami)
 LOG_FILE="<%= @catalina_base %>/logs/${TOMCAT_PROG}.log"

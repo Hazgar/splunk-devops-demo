@@ -1,5 +1,5 @@
 
-class riskim_jdk::data
+class custom_jdk::data
 {
   case $::operatingsystem
   {

@@ -1,5 +1,5 @@
 
-class riskim_tomcat::data
+class custom_tomcat::data
 {
   case $::operatingsystem
   {

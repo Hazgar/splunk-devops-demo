@@ -1,14 +1,14 @@
 
-define riskim_tomcat::deploy_war (
+define custom_tomcat::deploy_war (
     $file,
     $service_name,
     $catalina_base,
     $artifact_id = undef,
     $artifact_version = 'LATEST',
     $artifact_groupid = undef,
-    $user = hiera( 'riskim_tomcat::install:user', $riskim_tomcat::data::user),
-    $group = hiera( 'riskim_tomcat::install:group', $riskim_tomcat::data::group),
-    $appsdir = hiera( 'riskim_tomcat::install::appsdir', undef),
+    $user = hiera( 'custom_tomcat::install:user', $custom_tomcat::data::user),
+    $group = hiera( 'custom_tomcat::install:group', $custom_tomcat::data::group),
+    $appsdir = hiera( 'custom_tomcat::install::appsdir', undef),
   )  {
 
   $file_ext = inline_template( "<%= File.extname(\"${file}\") %>" )

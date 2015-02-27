@@ -1,11 +1,11 @@
 
-class riskim_jdk::install::sourceinstall
+class custom_jdk::install::sourceinstall
 (
-  $prefix = hiera( 'riskim_jdk::install::prefix', $riskim_jdk::data::prefix ),
-  $packagedir = hiera( 'riskim_jdk::install::packagedir', $riskim_jdk::data::packagedir ),
-  $version = hiera( 'riskim_jdk::install::version', $riskim_jdk::data::version ),
-  $user = hiera( 'riskim_jdk::install::user', $riskim_jdk::data::user ),
-  $group = hiera( 'riskim_jdk::install::group', $riskim_jdk::data::group ),
+  $prefix = hiera( 'custom_jdk::install::prefix', $custom_jdk::data::prefix ),
+  $packagedir = hiera( 'custom_jdk::install::packagedir', $custom_jdk::data::packagedir ),
+  $version = hiera( 'custom_jdk::install::version', $custom_jdk::data::version ),
+  $user = hiera( 'custom_jdk::install::user', $custom_jdk::data::user ),
+  $group = hiera( 'custom_jdk::install::group', $custom_jdk::data::group ),
 )
 {
   $archive = "jdk${version}"

@@ -1,12 +1,12 @@
 
-class riskim_tomcat::install::sourceinstall
+class custom_tomcat::install::sourceinstall
 (
-  $prefix = hiera( 'riskim_tomcat::install::prefix', $riskim_tomcat::data::prefix ),
-  $packagedir = hiera( 'riskim_tomcat::install::packagedir', $riskim_tomcat::data::packagedir ),
-  $version = hiera( 'riskim_tomcat::install::version', $riskim_tomcat::data::version ),
-  $instancedir = hiera( 'riskim_tomcat::config::instancedir', $riskim_tomcat::data::instancedir ),
-  $user = hiera( 'riskim_tomcat::install::user', $riskim_tomcat::data::user ),
-  $group = hiera( 'riskim_tomcat::install::group', $riskim_tomcat::data::group ),
+  $prefix = hiera( 'custom_tomcat::install::prefix', $custom_tomcat::data::prefix ),
+  $packagedir = hiera( 'custom_tomcat::install::packagedir', $custom_tomcat::data::packagedir ),
+  $version = hiera( 'custom_tomcat::install::version', $custom_tomcat::data::version ),
+  $instancedir = hiera( 'custom_tomcat::config::instancedir', $custom_tomcat::data::instancedir ),
+  $user = hiera( 'custom_tomcat::install::user', $custom_tomcat::data::user ),
+  $group = hiera( 'custom_tomcat::install::group', $custom_tomcat::data::group ),
 )
 {
     #if $version =~ /^(\d+)\.([.\d]+)/
@@ -16,7 +16,7 @@ class riskim_tomcat::install::sourceinstall
     #}
     #else
     #{
-    #  fail( "Tomcat sourceinstall requires a version specified as riskim_tomcat::install::version (matching /^(\\d+)\\.([.\\d]+)/ )" )
+    #  fail( "Tomcat sourceinstall requires a version specified as custom_tomcat::install::version (matching /^(\\d+)\\.([.\\d]+)/ )" )
     #}
 
     #$url = "http://apache.belnet.be/tomcat/tomcat-${tomcat_maj_version}/v${version}/bin"

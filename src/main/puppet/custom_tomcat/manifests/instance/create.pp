@@ -1,5 +1,5 @@
 
-define riskim_tomcat::instance::create (
+define custom_tomcat::instance::create (
       $user,
       $group,
       $prefix,
@@ -25,7 +25,7 @@ define riskim_tomcat::instance::create (
       $service_enabled,
   ) {
   
-  $service_name  = "riskim_${instance_name}"
+  $service_name  = "custom_${instance_name}"
 
   notify {"instance=$instance_name": }
 
@@ -36,14 +36,14 @@ define riskim_tomcat::instance::create (
   #
   # BEGIN
   #
-  anchor { "riskim_tomcat::instance::create::${instance_name}::begin": }
+  anchor { "custom_tomcat::instance::create::${instance_name}::begin": }
 
   file { "${catalina_base}":
     ensure  => directory,
     owner   => $user,
     group   => $group,
     mode    => '0755',
-    require => Anchor["riskim_tomcat::instance::create::${instance_name}::begin"],
+    require => Anchor["custom_tomcat::instance::create::${instance_name}::begin"],
   }
 
   if ( ! empty( $logs_directory ) )
@@ -69,7 +69,7 @@ define riskim_tomcat::instance::create (
       target  => "${logs_directory}/instance${instance}",
       force   => true,
       require => File["${catalina_base}"],
-      before  => Anchor["riskim_tomcat::instance::create::${instance_name}::pre"],
+      before  => Anchor["custom_tomcat::instance::create::${instance_name}::pre"],
     }
   }
   else
@@ -80,14 +80,14 @@ define riskim_tomcat::instance::create (
       group   => $group,
       mode    => '0775',
       require => File["${catalina_base}"],
-      before  => Anchor["riskim_tomcat::instance::create::${instance_name}::pre"],
+      before  => Anchor["custom_tomcat::instance::create::${instance_name}::pre"],
     }
   }
 
   #
   # PRE
   #
-  anchor { "riskim_tomcat::instance::create::${instance_name}::pre": }
+  anchor { "custom_tomcat::instance::create::${instance_name}::pre": }
 
   file {  [
             "${catalina_base}/bin",
@@ -101,20 +101,20 @@ define riskim_tomcat::instance::create (
     owner   => $user,
     group   => $group,
     mode    => '0755',
-    require => Anchor["riskim_tomcat::instance::create::${instance_name}::pre"],
-    before  => Anchor["riskim_tomcat::instance::create::${instance_name}::cfg"],
+    require => Anchor["custom_tomcat::instance::create::${instance_name}::pre"],
+    before  => Anchor["custom_tomcat::instance::create::${instance_name}::cfg"],
   } ~>
   exec { "cp_tomcat_${instance_name}":
       command     => "cp -a ${prefix}/tomcat/bin ${catalina_base}/. && cp -a ${prefix}/tomcat/bin ${catalina_base}/.  && cp -a ${prefix}/tomcat/lib ${catalina_base}/. && cp -a ${prefix}/tomcat/conf ${catalina_base}/. && cp -a ${prefix}/tomcat/webapps ${catalina_base}/. && chown -R ${user}:${group} ${catalina_base}",
       refreshonly => true,
       subscribe   => File["${catalina_base}"], 
-      before      => Anchor["riskim_tomcat::instance::create::${instance_name}::cfg"],
+      before      => Anchor["custom_tomcat::instance::create::${instance_name}::cfg"],
   }
 
   #
   # CFG
   #
-  anchor { "riskim_tomcat::instance::create::${instance_name}::cfg": }
+  anchor { "custom_tomcat::instance::create::${instance_name}::cfg": }
 
   # setenv.sh
   file { "${catalina_base}/bin/setenv.sh":
@@ -123,8 +123,8 @@ define riskim_tomcat::instance::create (
     owner   => $user,
     group   => $group,
     mode    => '0755',
-    require => [ Anchor["riskim_tomcat::instance::create::${instance_name}::cfg"], File["${catalina_base}/bin"] ],
-    before  => Anchor["riskim_tomcat::instance::create::${instance_name}::module"],
+    require => [ Anchor["custom_tomcat::instance::create::${instance_name}::cfg"], File["${catalina_base}/bin"] ],
+    before  => Anchor["custom_tomcat::instance::create::${instance_name}::module"],
   }
   # server.xml
   file { "${catalina_base}/conf/server.xml":
@@ -133,8 +133,8 @@ define riskim_tomcat::instance::create (
     owner   => $user,
     group   => $group,
     mode    => '0644',
-    require => [ Anchor["riskim_tomcat::instance::create::${instance_name}::cfg"], File["${catalina_base}/conf"] ],
-    before  => Anchor["riskim_tomcat::instance::create::${instance_name}::module"],
+    require => [ Anchor["custom_tomcat::instance::create::${instance_name}::cfg"], File["${catalina_base}/conf"] ],
+    before  => Anchor["custom_tomcat::instance::create::${instance_name}::module"],
   }
   # catalina.properties
   file { "${catalina_base}/conf/catalina.properties":
@@ -143,8 +143,8 @@ define riskim_tomcat::instance::create (
     owner   => $user,
     group   => $group,
     mode    => '0644',
-    require => [ Anchor["riskim_tomcat::instance::create::${instance_name}::cfg"], File["${catalina_base}/conf"] ],
-    before  => Anchor["riskim_tomcat::instance::create::${instance_name}::module"],
+    require => [ Anchor["custom_tomcat::instance::create::${instance_name}::cfg"], File["${catalina_base}/conf"] ],
+    before  => Anchor["custom_tomcat::instance::create::${instance_name}::module"],
   }
   # tomcat-users.xml
   file { "${catalina_base}/conf/tomcat-users.xml":
@@ -153,8 +153,8 @@ define riskim_tomcat::instance::create (
     owner   => $user,
     group   => $group,
     mode    => '0644',
-    require => [ Anchor["riskim_tomcat::instance::create::${instance_name}::cfg"], File["${catalina_base}/conf"] ],
-    before  => Anchor["riskim_tomcat::instance::create::${instance_name}::module"],
+    require => [ Anchor["custom_tomcat::instance::create::${instance_name}::cfg"], File["${catalina_base}/conf"] ],
+    before  => Anchor["custom_tomcat::instance::create::${instance_name}::module"],
   }
   # init script
   file { "/etc/init.d/${service_name}":
@@ -163,14 +163,14 @@ define riskim_tomcat::instance::create (
     owner   => root,
     group   => root,
     mode    => '0755',
-    require => Anchor["riskim_tomcat::instance::create::${instance_name}::cfg"],
-    before  => Anchor["riskim_tomcat::instance::create::${instance_name}::module"],
+    require => Anchor["custom_tomcat::instance::create::${instance_name}::cfg"],
+    before  => Anchor["custom_tomcat::instance::create::${instance_name}::module"],
   }
 
   #
   # MODULE
   #
-  anchor { "riskim_tomcat::instance::create::${instance_name}::module": }
+  anchor { "custom_tomcat::instance::create::${instance_name}::module": }
 
   if ( $config_class ) and ( ! empty( $config_class ) )
   {
@@ -181,8 +181,8 @@ define riskim_tomcat::instance::create (
         catalina_base => $catalina_base,
         instance_name => $instance_name,
         instance => $instance,
-        require  => Anchor["riskim_tomcat::instance::create::${instance_name}::module"],
-        before   => Anchor["riskim_tomcat::instance::create::${instance_name}::post"],
+        require  => Anchor["custom_tomcat::instance::create::${instance_name}::module"],
+        before   => Anchor["custom_tomcat::instance::create::${instance_name}::post"],
       }
     }
     create_resources( "$config_class", $config, $config_options )
@@ -191,35 +191,35 @@ define riskim_tomcat::instance::create (
   #
   # POST
   #
-  anchor { "riskim_tomcat::instance::create::${instance_name}::post": }
+  anchor { "custom_tomcat::instance::create::${instance_name}::post": }
 
   $defaults = {
     catalina_base => $catalina_base,
     user          => $user,
     group         => $group,
     service_name  => $service_name,
-    require       => Anchor["riskim_tomcat::instance::create::${instance_name}::post"],
-    before        => Anchor["riskim_tomcat::instance::create::${instance_name}::service"],
+    require       => Anchor["custom_tomcat::instance::create::${instance_name}::post"],
+    before        => Anchor["custom_tomcat::instance::create::${instance_name}::service"],
   }
-  create_resources( riskim_tomcat::deploy_war, $real_webapps, $defaults )
+  create_resources( custom_tomcat::deploy_war, $real_webapps, $defaults )
 
   #
   # SERVICE
   #
-  anchor { "riskim_tomcat::instance::create::${instance_name}::service": }
+  anchor { "custom_tomcat::instance::create::${instance_name}::service": }
 
   $service = { "service_${instance_name}" => {
       service_name    => $service_name,
       service_enabled => $service_enabled,
       require         => [ File["/etc/init.d/${service_name}"],
-                           Anchor["riskim_tomcat::instance::create::${instance_name}::service"] ],
-      before          => Anchor["riskim_tomcat::instance::create::${instance_name}::end"],
+                           Anchor["custom_tomcat::instance::create::${instance_name}::service"] ],
+      before          => Anchor["custom_tomcat::instance::create::${instance_name}::end"],
     }
   }
-  create_resources( riskim_tomcat::instance::service, $service )
+  create_resources( custom_tomcat::instance::service, $service )
 
   #
   # END
   #
-  anchor { "riskim_tomcat::instance::create::${instance_name}::end": }
+  anchor { "custom_tomcat::instance::create::${instance_name}::end": }
 }

@@ -5,7 +5,7 @@
 
 	<groupId>com.splunk.slapie.demo.devops</groupId>
 	<artifactId>calculator</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<name>devops-demo:calculator</name>
@@ -36,6 +36,14 @@
           <url>http://10.21.21.99:8112/nexus/content/repositories/snapshots</url>
         </snapshotRepository -->
         </distributionManagement>
+
+        <repositories> 
+            <repository> 
+                <id>splunk-artifactory</id> 
+                <name>Splunk Releases</name> 
+                <url>http://splunk.artifactoryonline.com/splunk/ext-releases-local</url> 
+            </repository> 
+        </repositories>
 
 
 	<properties>
@@ -76,7 +84,48 @@
 		    <version>1.9.5</version>
 		    <scope>test</scope>
 		</dependency>
+                <!--dependency> 
+                    <groupId>com.splunk.logging</groupId> 
+                    <artifactId>splunk-library-javalogging</artifactId> 
+                    <version>1.5.0</version> 
+                </dependency-->
+                <dependency>
+                    <groupId>com.spotify</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>0.4.3</version>
+                </dependency>
 	</dependencies>
+
+        <profiles>
+            <profile>
+                <id>docker</id>
+                <build>
+                    <plugins>
+                        <plugin>
+                            <groupId>com.spotify</groupId>
+                            <artifactId>docker-maven-plugin</artifactId>
+                            <version>0.4.3</version>
+                            <configuration>
+                                <imageName>hazgar/splunk-devops-demo</imageName>
+                                <baseImage>tomcat</baseImage>
+                                <!-- entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint -->
+                                <!-- copy the service's jar file from target into the root directory of the image --> 
+                                <resources>
+                                    <resource>
+                                        <targetPath>/usr/local/tomcat/webapps</targetPath>
+                                        <directory>${project.build.directory}</directory>
+                                        <include>${project.artifactId}.war</include>
+                                    </resource>
+                                </resources>
+                                <serverId>docker-hub</serverId>
+                                <registryUrl>https://index.docker.io/v1/</registryUrl>
+                            </configuration>
+                        </plugin>
+                    </plugins>
+                </build>
+ 
+            </profile>
+        </profiles>
 
 	<build>
 		<plugins>
@@ -86,13 +135,14 @@
 				<configuration>
 					<url>http://localhost:8080/manager/text</url>
 					<server>tomcat7</server>
-					<path>/devops-demo</path>
+					<path>/calculator</path>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
+                                    <warName>${project.artifactId}</warName>
 				    <archive>
 					<manifest>
 					    <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
@@ -112,6 +162,7 @@
                             <configuration>
                                 <systemPropertyVariables>
                                     <java.util.logging.SimpleFormatter.format>%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS %4$s %2$s %5$s%6$s%n</java.util.logging.SimpleFormatter.format>
+                                    <java.util.logging.config.file>${project.basedir}/src/main/resources/splunk_logging.properties</java.util.logging.config.file>
                                 </systemPropertyVariables>
                             </configuration>
                         </plugin>

@@ -2,7 +2,7 @@ package demo;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Logger;
+import java.util.logging.*;
 
 import javax.validation.Valid;
 

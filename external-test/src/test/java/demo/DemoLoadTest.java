@@ -26,7 +26,7 @@ public class DemoLoadTest
 	@Context
 	private Response response;
 	
-	@HttpTest( method = Method.GET, path = "/devops-demo/calculation/single/2015-01-01/AC" )
+	@HttpTest( method = Method.GET, path = "/calculator/calculation/single/2015-01-01/AC" )
 	@Poll( times = 10, interval = 1 )
 	public void singleCalculationTest()
 	{
@@ -34,14 +34,14 @@ public class DemoLoadTest
 		System.out.println( pollState.getTimes() + ". Responsecode = " + pollState.getResponse( pollState.getTimes() ).getStatus() );
 	}
 	
-	@HttpTest( method = Method.GET, path = "/devops-demo/counterparties/",
+	@HttpTest( method = Method.GET, path = "/calculator/counterparties/",
 	headers = { @Header( name = "Accepted-Language", value = "en-en" ) } )
 	public void serviceStatusTest()
 	{
 		assertOk( response );
 	}
 	
-	@HttpTest( method = Method.GET, path = "/devops-demo/calculation/batch/2015-01-01" )
+	@HttpTest( method = Method.GET, path = "/calculator/calculation/batch/2015-01-01" )
 	@Poll( times = 5, interval = 10 )
 	public void batchCalculationTest()
 	{

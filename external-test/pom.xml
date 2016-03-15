@@ -7,7 +7,7 @@
 	<artifactId>extest</artifactId>
 	<packaging>jar</packaging>
 
-	<name>devops-demo:external-test</name>
+	<name>calculator:external-test</name>
 	<description>DevOps Demo Project: External Tests</description>
         <organization>
 		<name>Splunk, Inc</name>
@@ -17,7 +17,7 @@
 	<parent>
 		<groupId>com.splunk.slapie.demo.devops</groupId>
 		<artifactId>devops-demo</artifactId>
- 		<version>0.0.1-SNAPSHOT</version>
+ 		<version>0.0.2-SNAPSHOT</version>
         </parent>
 
 
@@ -48,7 +48,7 @@
 			<properties>
 				<perftest.webservice.host>localhost</perftest.webservice.host>	
 				<perftest.webservice.port>8080</perftest.webservice.port>	
-				<perftest.webservice.path>/devops-demo/calculation/single/2015-01-29</perftest.webservice.path>
+				<perftest.webservice.path>/calculator/calculation/single/2015-01-29</perftest.webservice.path>
 				<perftest.webservice.connectTimeout>5000</perftest.webservice.connectTimeout>
 				<perftest.webservice.responseTimeout>5000</perftest.webservice.responseTimeout>
 				<restfuse.path.prefix>/</restfuse.path.prefix>
@@ -59,7 +59,7 @@
 			<properties>
 				<perftest.webservice.host>10.21.21.100</perftest.webservice.host>	
 				<perftest.webservice.port>80</perftest.webservice.port>	
-				<perftest.webservice.path>/test/devops-demo/calculation/single/2015-01-29</perftest.webservice.path>
+				<perftest.webservice.path>/test/calculator/calculation/single/2015-01-29</perftest.webservice.path>
 				<perftest.webservice.connectTimeout>5000</perftest.webservice.connectTimeout>
 				<perftest.webservice.responseTimeout>5000</perftest.webservice.responseTimeout>
 				<restfuse.path.prefix>/test</restfuse.path.prefix>

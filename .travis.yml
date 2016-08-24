@@ -4,7 +4,7 @@ services:
 before_install: mvn clean
 install: mvn test package -P calc,docker
 after_success:
- - docker run -d -p 8080:8080 hazgar/splunk-devops-demo --name splunk-devops-demo
+ - docker run -d --name splunk-devops-demo -p 8080:8080 hazgar/splunk-devops-demo
  - mvn clean test verify -P extest,local,perftest
  - docker stop splunk-devops-demo
  - docker rm splunk-devops-demo

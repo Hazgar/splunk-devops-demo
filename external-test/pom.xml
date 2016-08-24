@@ -57,12 +57,12 @@
 		<profile>
 			<id>remote</id>
 			<properties>
-				<perftest.webservice.host>10.21.21.100</perftest.webservice.host>	
-				<perftest.webservice.port>80</perftest.webservice.port>	
-				<perftest.webservice.path>/test/calculator/calculation/single/2015-01-29</perftest.webservice.path>
+				<perftest.webservice.host>localhost</perftest.webservice.host>	
+				<perftest.webservice.port>32774</perftest.webservice.port>	
+				<perftest.webservice.path>/calculator/calculation/single/2015-01-29</perftest.webservice.path>
 				<perftest.webservice.connectTimeout>5000</perftest.webservice.connectTimeout>
 				<perftest.webservice.responseTimeout>5000</perftest.webservice.responseTimeout>
-				<restfuse.path.prefix>/test</restfuse.path.prefix>
+				<restfuse.path.prefix>/</restfuse.path.prefix>
 			</properties>
 		</profile>
 

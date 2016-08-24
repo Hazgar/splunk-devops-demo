@@ -1,4 +1,8 @@
 language: java
+services:
+ - docker
 before_install: mvn clean
-install: mvn test -P calc
+install: mvn test package -P calc,docker
+after_success:
+ - docker run hazgar/splunk-devops-demo
 

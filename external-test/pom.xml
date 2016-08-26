@@ -85,7 +85,7 @@
 								<loopCount>2</loopCount>
 							</propertiesUser>
 							<testResultsTimestamp>true</testResultsTimestamp>
-							<overrideRootLogLevel>DEBUG</overrideRootLogLevel>
+							<overrideRootLogLevel>INFO</overrideRootLogLevel>
 							<suppressJMeterOutput>false</suppressJMeterOutput>
 							<ignoreResultFailures>false</ignoreResultFailures>
 							<propertiesJMeter>

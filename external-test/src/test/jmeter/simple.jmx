@@ -113,12 +113,11 @@
         </HTTPSamplerProxy>
         <hashTree/>
       </hashTree>
-      <kg.apc.jmeter.reporters.ConsoleStatusLogger guiclass="kg.apc.jmeter.reporters.ConsoleStatusLoggerGui" testclass="kg.apc.jmeter.reporters.ConsoleStatusLogger" testname="jp@gc - Console Status Logger" enabled="true"/>
+      <kg.apc.jmeter.reporters.ConsoleStatusLogger guiclass="kg.apc.jmeter.reporters.ConsoleStatusLoggerGui" testclass="kg.apc.jmeter.reporters.ConsoleStatusLogger" testname="jp@gc - Console Status Logger" enabled="false"/>
       <hashTree/>
-      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="false">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
-          <name>saveConfig</name>
           <value class="SampleSaveConfiguration">
             <time>true</time>
             <latency>true</latency>
@@ -142,6 +141,8 @@
             <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
             <assertionsResultsToSave>0</assertionsResultsToSave>
             <bytes>true</bytes>
+            <url>true</url>
+            <hostname>true</hostname>
             <threadCounts>true</threadCounts>
           </value>
         </objProp>
@@ -158,6 +159,22 @@
         <boolProp name="stopThread">false</boolProp>
         <stringProp name="variableNames">ctrp</stringProp>
       </CSVDataSet>
+      <hashTree/>
+      <BeanShellListener guiclass="TestBeanGUI" testclass="BeanShellListener" testname="BeanShell Listener" enabled="true">
+        <stringProp name="filename"></stringProp>
+        <stringProp name="parameters"></stringProp>
+        <boolProp name="resetInterpreter">false</boolProp>
+        <stringProp name="script">
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import org.apache.jmeter.samplers.*;
+
+SimpleDateFormat dateFormat = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss z&quot;);
+SampleResult result = ctx.getPreviousResult();
+Date date = new Date(result.getTimeStamp());
+System.out.printf(&quot;%s - thread=%s,url=%s,status=%s,message=%s,latency=%s,bytes=%s,error=%s\n&quot;, new Object[]{dateFormat.format(date), result.getThreadName(), ctx.getCurrentSampler(), result.getResponseCode(), result.getResponseMessage(), result.getLatency(), result.getBodySize(), result.getErrorCount()});
+</stringProp>
+      </BeanShellListener>
       <hashTree/>
     </hashTree>
   </hashTree>

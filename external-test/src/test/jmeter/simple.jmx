@@ -146,6 +146,35 @@
             <threadCounts>true</threadCounts>
           </value>
         </objProp>
+        <objProp>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <url>true</url>
+            <hostname>true</hostname>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
         <stringProp name="filename">/Users/slapie/work/devops-demo/simple.jtl</stringProp>
       </ResultCollector>
       <hashTree/>
@@ -172,7 +201,7 @@ import org.apache.jmeter.samplers.*;
 SimpleDateFormat dateFormat = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss z&quot;);
 SampleResult result = ctx.getPreviousResult();
 Date date = new Date(result.getTimeStamp());
-System.out.printf(&quot;%s - thread=%s,url=%s,status=%s,message=%s,latency=%s,bytes=%s,error=%s\n&quot;, new Object[]{dateFormat.format(date), result.getThreadName(), ctx.getCurrentSampler(), result.getResponseCode(), result.getResponseMessage(), result.getLatency(), result.getBodySize(), result.getErrorCount()});
+System.out.printf(&quot;%s - thread=%s,url=%s,status=%s,message=%s,duration=%s,latency=%s,bytes=%s,error=%s\n&quot;, new Object[]{dateFormat.format(date), result.getThreadName(), ctx.getCurrentSampler(), result.getResponseCode(), result.getResponseMessage(), result.getTime(), result.getLatency(), result.getBodySize(), result.getErrorCount()});
 </stringProp>
       </BeanShellListener>
       <hashTree/>

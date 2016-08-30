@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.splunk.slapie.demo.devops</groupId>
+	<artifactId>monitor</artifactId>
+	<packaging>pom</packaging>
+
+	<name>monitor</name>
+	<description>DevOps Demo Project: Monitoring stuff</description>
+        <organization>
+		<name>Splunk, Inc</name>
+    		<url>http://www.splunk.com</url>
+	</organization>
+
+	<parent>
+		<groupId>com.splunk.slapie.demo.devops</groupId>
+		<artifactId>devops-demo</artifactId>
+ 		<version>0.0.2-SNAPSHOT</version>
+        </parent>
+
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.7</java.version>
+	</properties>
+
+	<dependencies>
+                <dependency>
+                    <groupId>com.spotify</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>0.4.3</version>
+                </dependency>
+	</dependencies>
+
+
+	<build>
+		<plugins>
+                        <plugin>
+                            <groupId>com.spotify</groupId>
+                            <artifactId>docker-maven-plugin</artifactId>
+                            <version>0.4.3</version>
+                            <configuration>
+                                <imageName>hazgar/monitoring-stub</imageName>
+                                <dockerDirectory>${project.basedir}/src/main/resources</dockerDirectory>
+                                <serverId>docker-hub</serverId>
+                                <registryUrl>https://index.docker.io/v1/</registryUrl>
+                            </configuration>
+                            <executions>
+                                <execution>
+                                  <id>build-image</id>
+                                  <phase>package</phase>
+                                  <goals>
+                                    <goal>build</goal>
+                                  </goals>
+                                </execution>
+                            </executions>
+                        </plugin>
+		</plugins>
+	</build>
+</project>

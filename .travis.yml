@@ -5,9 +5,10 @@ before_install: mvn clean
 install: mvn test package -P calc,docker,monitoring
 after_success:
  - docker run -d --name splunk-devops-demo --log-driver=splunk --log-opt splunk-token=601E28D2-2266-4B5D-8002-1D9727CFC69B --log-opt splunk-url=https://54.194.105.157:8088 --log-opt splunk-insecureskipverify=true -p 8080:8080 hazgar/splunk-devops-demo
- - docker run -ti --log-driver=splunk --log-opt splunk-token=601E28D2-2266-4B5D-8002-1D9727CFC69B --log-opt splunk-url=https://54.194.105.157:8088 --log-opt splunk-insecureskipverify=true -v /var/run/docker.sock:/var/run/docker.sock hazgar/monitoring-stub curl --unix-socket /var/run/docker.sock http:/localhost/containers/splunk-devops-demo/stats
+ - docker run -d --name monitoring  --log-driver=splunk --log-opt splunk-token=601E28D2-2266-4B5D-8002-1D9727CFC69B --log-opt splunk-url=https://54.194.105.157:8088 --log-opt splunk-insecureskipverify=true -v /var/run/docker.sock:/var/run/docker.sock hazgar/monitoring-stub curl --unix-socket /var/run/docker.sock http:/localhost/containers/splunk-devops-demo/stats
  - mvn clean test verify -P extest,local,perftest
  - docker stop splunk-devops-demo
+ - docker stop monitoring
  - docker rm splunk-devops-demo
- - pkill -f curl
+ - docker rm monitoring
 

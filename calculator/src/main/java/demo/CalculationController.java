@@ -7,6 +7,7 @@ import java.util.logging.*;
 import javax.validation.Valid;
 
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,7 @@ public class CalculationController
 	private final static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 	private final static Logger logger = Logger.getLogger(CalculationController.class.getName());;
 	
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/batch/{cob_date}", method = RequestMethod.GET)
     public BatchCalculationResult batchCalculation(@PathVariable String cob_date) throws CobFormatException
     {
@@ -55,6 +57,7 @@ public class CalculationController
     	return result;
     }
     
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/single/{cob_date}/{symbol}", method = RequestMethod.GET)
     public CalculationResult singleCalculation(@PathVariable String cob_date, @PathVariable String symbol) throws CobFormatException
     {
@@ -83,6 +86,7 @@ public class CalculationController
     	return result;
     }
     
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/single", method = RequestMethod.POST)
     public CalculationResult postSingleCalculation(@Valid String cob_date, @Valid String symbol) throws CobFormatException
     {

@@ -18,7 +18,5 @@ after_success:
 - docker rm monitoring
 env:
   global:
-    AWS_ACCESS_KEY_ID:
-      - secure: MGMXHkWXj/qyRU83FpfAnEMWU8lsCfsGVhmMhFkNPZ213mFUwT+yW6q3u/vLrhViXZbjuGQl9nyZO193CEdrnCZWQMJcVZQkmeK+xFd6jv6sUB9be416nzaKC8z06wBkEFUu1qA2z9MY3KEyz1pdda5qIbTQidjhjJe2HSq750c=
-    AWS_SECRET_ACCESS_KEY:
-      - secure: TQp3zsgqGH9J78dndBODwytg9PMlEKVyL2AuJ4r6+TQaDfNkgIMpDvlL1Y/yVwHOws2DdFE21ddXrODWcHTukwBUn3X4mIR2Gq/ihIJla25ZgelTDeQ4V+bSr37TqEaWiqvhas8J1wmVTTaeRy1F+P71VYw1Uuv3jEN/1DJARng=
+  - secure: IqgmnKD48arijpA45vfATqMC0gcCUHhJMHWXy7KpvTH9T7pzTQQfYuL1VoAC6E//gEaCki6sMG2OMUgYDYpj1rf9ZwTrL9R640goEmpaQwb87bl2jwZdgSOyuWEpDZUG3TkrLEtuBnJyJ5npHJVmynikNirK6WyzKasW2yuqaV4=
+  - secure: Zz0gE3otU/TCVnSlECiTmvJ4GsS0rKKtJWowf7Ss63emQKFxcTf/1OpfNJWMpucK4/Soa077rvh06x4VTPeiyyguKFTdNoyO/n6fxOyhgriS+mrKmKtvnvI1Rxet7vaN0iV2MZMchrSdy5XUz9hyE3QIF7jiYjXzXhHNl6gAIQ8=

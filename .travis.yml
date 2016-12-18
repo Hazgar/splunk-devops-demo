@@ -1,14 +1,30 @@
 language: java
 services:
- - docker
-before_install: mvn clean
+- docker
+before_install:
+- pip install --user awscli
+- export PATH=$PATH:$HOME/.local/bin
+- eval $(aws ecr get-login --region eu-west-1)
+- mvn clean
 install: mvn test package -P calc,docker,monitoring
 after_success:
- - docker run -d --name splunk-devops-demo --log-driver=splunk --log-opt splunk-token=601E28D2-2266-4B5D-8002-1D9727CFC69B --log-opt splunk-url=https://54.194.105.157:8088 --log-opt splunk-insecureskipverify=true -p 8080:8080 hazgar/splunk-devops-demo
- - docker run -d --name monitoring  --log-driver=splunk --log-opt splunk-token=601E28D2-2266-4B5D-8002-1D9727CFC69B --log-opt splunk-url=https://54.194.105.157:8088 --log-opt splunk-insecureskipverify=true -v /var/run/docker.sock:/var/run/docker.sock hazgar/monitoring-stub curl --unix-socket /var/run/docker.sock http:/localhost/containers/splunk-devops-demo/stats
- - mvn clean test verify -P extest,local,perftest
- - docker stop splunk-devops-demo
- - docker stop monitoring
- - docker rm splunk-devops-demo
- - docker rm monitoring
-
+#- docker run -d --name splunk-devops-demo --log-driver=splunk --log-opt splunk-token=601E28D2-2266-4B5D-8002-1D9727CFC69B
+#  --log-opt splunk-url=https://54.194.105.157:8088 --log-opt splunk-insecureskipverify=true
+#  -p 8080:8080 hazgar/splunk-devops-demo
+#- docker run -d --name monitoring  --log-driver=splunk --log-opt splunk-token=601E28D2-2266-4B5D-8002-1D9727CFC69B
+#  --log-opt splunk-url=https://54.194.105.157:8088 --log-opt splunk-insecureskipverify=true
+#  -v /var/run/docker.sock:/var/run/docker.sock hazgar/monitoring-stub curl --unix-socket
+#  /var/run/docker.sock http:/localhost/containers/splunk-devops-demo/stats
+- docker run -d --name splunk-devops-demo -p 8080:8080 hazgar/splunk-devops-demo
+- mvn clean test verify -P extest,local,perftest
+- docker hazgar/splunk-devops-demo:latest 242698106395.dkr.ecr.eu-west-1.amazonaws.com/s4x/devops-demo:latest
+- docker stop splunk-devops-demo
+- docker stop monitoring
+- docker rm splunk-devops-demo
+- docker rm monitoring
+env:
+  global:
+    AWS_ACCESS_KEY_ID:
+      secure: fshR2bCMHp4AdjePDrO0D4yumWtGyMnwquoa1qDXGYp/TUuU2mI/+//b3LwToh2K0htCOQQ3ZILu+5McuuiLL9rIF0j6Agzliok73E/lW0y3cHEi5nwgZ0VLc5XCQ8AYLNWSnkz9okCXSGpMwOmMzY2JJ1jgkCw91BmunjWE+10=
+    AWS_SECRET_ACCESS_KEY:
+      secure: RuxxcZDLwLLJg+7N+R8byb9Mk3Dp6LaCE7Vl4qg5qc7vPbZBMgoubOzqjbqroP+FzybXPHHivZI3BfcpGSsfIFVHy6vbMewamsUlR/6vkGKKCbxpe6JpQBeI4rG8hByYPunltvZVLzW+rSSj11URCqbllrm/7oVxQTqGZ7OKVqA=

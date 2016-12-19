@@ -45,6 +45,12 @@
 			</modules>
 		</profile>
 		<profile>
+			<id>front</id>
+			<modules>
+				<module>frontend</module>
+			</modules>
+		</profile>
+		<profile>
 			<id>monitoring</id>
 			<modules>
 				<module>monitoring</module>

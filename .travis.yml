@@ -6,12 +6,14 @@ before_install:
 - export PATH=$PATH:$HOME/.local/bin
 - eval $(aws ecr get-login --region eu-west-1)
 - mvn clean
-install: mvn test package -P calc,docker,monitoring
+install: mvn test package -P calc,docker,front,monitoring
 after_success:
 - docker run -d --name splunk-devops-demo -p 8080:8080 hazgar/splunk-devops-demo
 - mvn clean test verify -P extest,local,perftest
 - docker tag hazgar/splunk-devops-demo:latest 242698106395.dkr.ecr.eu-west-1.amazonaws.com/s4x/devops-demo:latest
 - docker push 242698106395.dkr.ecr.eu-west-1.amazonaws.com/s4x/devops-demo:latest
+- docker tag hazgar/splunk-devops-demo-front:latest 242698106395.dkr.ecr.eu-west-1.amazonaws.com/s4x/devops-demo-front:latest
+- docker push 242698106395.dkr.ecr.eu-west-1.amazonaws.com/s4x/devops-demo-front:latest
 - docker stop splunk-devops-demo
 - docker stop monitoring
 - docker rm splunk-devops-demo

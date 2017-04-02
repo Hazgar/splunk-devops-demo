@@ -1,0 +1,27 @@
+version: 0.1
+
+#environment_variables:
+#  plaintext:
+#    JAVA_HOME: "/usr/lib/jvm/java-8-openjdk-amd64"
+
+phases:
+  install:
+    commands:
+      - apt-get update -y
+      - apt-get install -y default-jdk maven
+  pre_build:
+    commands:
+      - $(aws ecr get-login --region eu-west-1)
+  build:
+    commands:
+      - echo "Build started on $(date)"
+      - mvn test package -P calc,docker,front,monitoring
+      - docker tag hazgar/splunk-devops-demo:latest 242698106395.dkr.ecr.eu-west-1.amazonaws.com/s4x/devops-demo:latest
+      - docker tag hazgar/splunk-devops-demo-front:latest 242698106395.dkr.ecr.eu-west-1.amazonaws.com/s4x/devops-demo-front:latest
+  post_build:
+    commands:
+      - docker push 242698106395.dkr.ecr.eu-west-1.amazonaws.com/s4x/devops-demo:latest
+      - docker push 242698106395.dkr.ecr.eu-west-1.amazonaws.com/s4x/devops-demo-front:latest 
+      - echo "Build completed on $(date)"
+artifacts:
+  discard-paths: yes

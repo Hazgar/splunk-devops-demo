@@ -221,7 +221,8 @@
               "status" : "failed",
               "cob" : $('#cobDate').val(),
               "ctrpId" : $('#ctrpId').val(),
-              "session" : guid
+              "session" : guid,
+              "message" : data.statusText
             });
 
             array.push('<div class="alert alert-danger" style="margin-bottom: 0" role="alert">');
@@ -271,6 +272,8 @@
         // Batch Calculation
         $('#batchCalculation').click( function()
         {
+          var guid = genGUID();
+
           $.ajax({
             url: 'http://54.194.101.160:8080/calculator/calculation/batch/'+$('#batchCobDate').val(),
             type: 'GET',
@@ -290,6 +293,16 @@
             var array = [];
             console.log(data);
 
+            splunkLog("INFO", {
+              "action" : "batchCalculation",
+              "step" : "end",
+              "status" : "failed",
+              "cob" : $('#batchCobDate').val(),
+              "session" : guid,
+              "message" : data.statusText
+            });
+
+            array.push('<div class="alert alert-danger" style="margin-bottom: 0" role="alert">');
             array.push('<div class="alert alert-danger" style="margin-bottom: 0" role="alert">');
             array.push('No result: '+data.statusText);
             array.push("</div>");            
@@ -299,6 +312,15 @@
           {
             console.log(data);
             $('#result').empty();
+
+            splunkLog("INFO", {
+              "action" : "batchCalculation",
+              "step" : "end",
+              "status" : "success",
+              "cob" : $('#batchCobDate').val(),
+              "calculationId" : data.id,
+              "session" : guid
+            });
 
             data.results.forEach(function (result, idx)
             {

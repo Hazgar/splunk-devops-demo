@@ -145,7 +145,7 @@
         $ipv4 = shell_exec("curl http://169.254.169.254/latest/meta-data/public-ipv4");
         $ipv4 = (empty($ipv4)) ? "localhost" : $ipv4;
 ?>
-      var SPLUNK_SERVER = "";
+      var SPLUNK_SERVER = "54.246.234.235:8088";
       var SPLUNK_TOKEN = "D13C414F-6D66-4BC1-B936-2D6E277E37D1";
       var APP_SERVER  = "<?=$ipv4?>:8080";
 

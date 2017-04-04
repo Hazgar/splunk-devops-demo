@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public class Calculation
 {
-	private static int MAGIC_FACTORIAL = 1;
+	private static int MAGIC_FACTORIAL = 50;
 	
     private final UUID id = UUID.randomUUID();
     private final Counterparty ctrp;
